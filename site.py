@@ -28,8 +28,7 @@ model = container.selectbox(
             'ARMA',
             'ARIMA',
             'SARIMA',
-            'Harmonic Regression',
-            'Fourier Analysis'
+            'Harmonic Regression'
         ]
     )
 
