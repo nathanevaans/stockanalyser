@@ -19,35 +19,31 @@ st.write("""
 # Forecaster
 """)
 
-with st.container():
-    ticker = st.text_input(label='## Stock Ticker').strip()
-
-    model = st.selectbox(
+container = st.container()
+ticker = container.text_input(label='## Stock Ticker').strip()
+model = container.selectbox(
         label='## Model',
         options=[
-            'None', 
-            'ARMA', 
-            'ARIMA', 
-            'SARIMA', 
-            'Harmonic Regression', 
+            'None',
+            'ARMA',
+            'ARIMA',
+            'SARIMA',
+            'Harmonic Regression',
             'Fourier Analysis'
         ]
     )
-    
-    if ticker == '':
-        st.write('')
-    elif ticker not in tickers:
-        st.error("Ticker not available")
-    else:
-        st.success(tickers[ticker])
-        if model != 'Select an option':
-            # do logic and alter graph
-            forecast_data = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
-            st.line_chart(forecast_data, use_container_width=True)
-        else:
-            # un edtited graph
-            forecast_data = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
-            st.line_chart(forecast_data, use_container_width=True)
 
-    
-    
+if ticker == '':
+    st.write('')
+elif ticker not in tickers:
+    st.error("Ticker not available")
+else:
+    st.success(tickers[ticker])
+    if model != 'None':
+        # do logic and alter graph
+        forecast_data = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
+        st.line_chart(forecast_data, use_container_width=True)
+    else:
+        # un edtited graph
+        forecast_data = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
+        st.line_chart(forecast_data, use_container_width=True)
