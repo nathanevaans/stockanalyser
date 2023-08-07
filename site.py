@@ -25,7 +25,7 @@ with st.container():
     model = st.selectbox(
         label='## Model',
         options=[
-            'Select an option', 
+            'None', 
             'ARMA', 
             'ARIMA', 
             'SARIMA', 
