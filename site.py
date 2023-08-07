@@ -2,12 +2,49 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
+tickers = {
+    'AAPL': 'Apple Inc.',
+    'MSFT': 'Microsoft Corporation',
+    'GOOG': 'Alphabet Inc. Class C',
+    'GOOGL': 'Alphabet Inc. Class A',
+    'AMZN': 'Amazon.com, Inc.',
+    'NVDA': 'NVIDIA Corporation',
+    'BRK/A': 'Berkshire Hathaway Inc.',
+    'META': 'Meta Platforms, Inc. Class A',
+    'BRK/B': 'Berkshire Hathaway Inc.',
+    'TSLA': 'Tesla, Inc.'
+}
+
 st.write("""
-# Hello World!
+# Forecaster
 """)
 
-chart_data = pd.DataFrame(
-     np.random.randn(20, 3),
-     columns=['a', 'b', 'c'])
+with st.container():
+    ticker = st.text_input(label='## Stock Ticker').strip()
 
-st.line_chart(chart_data)
+    if ticker == '':
+        st.write('')
+    elif ticker not in tickers:
+        st.error("Ticker not available")
+    else:
+        st.success(tickers[ticker])
+
+    model = st.selectbox(
+        label='## Model',
+        options=[
+            'Select an option', 
+            'ARMA', 
+            'ARIMA', 
+            'SARIMA', 
+            'Harmonic Regression', 
+            'Fourier Analysis'
+        ]
+    )
+    if model != 'Select an option':
+        # do logic and alter graph
+        forecast_data = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
+        st.line_chart(forecast_data, use_container_width=True)
+    else:
+        # un edtited graph
+        forecast_data = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
+        st.line_chart(forecast_data, use_container_width=True)
