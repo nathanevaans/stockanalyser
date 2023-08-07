@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 st.write("""
-# My sine graph
+# Hello World!
 """)
 
 chart_data = pd.DataFrame(
